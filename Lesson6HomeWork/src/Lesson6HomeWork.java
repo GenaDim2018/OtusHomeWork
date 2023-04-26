@@ -43,7 +43,7 @@ public class Lesson6HomeWork {
             System.out.println();
             for (int j = 1; j < 6; j++) { //Вывод вариантов ответов
                 if (!(tests[i][j] ==(null))) {
-                    System.out.println(Integer.toString(j) + ") " + tests[i][j]);
+                    System.out.println(j + ") " + tests[i][j]);
                 }
             }
             System.out.println();
