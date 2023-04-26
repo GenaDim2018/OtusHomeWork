@@ -4,29 +4,31 @@ public class Lesson6HomeWork {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int score = 0; //счётчик правильных ответов
-        String answer; //переменная для сканера
-        //[№][вопрос][варианты ответа][№правильного ответа][флаг(правильно/неправильно)]
-        String[][] tests = new String[3][7];
-        //заполнение номеров вопросов
-        for (int i = 0; i < tests.length; i++) {
-            tests[i][0] = Integer.toString(i + 1);
-        }
-        //заполнение таблицы с вопросами и ответами
-        tests[0][1] = "Чему равно значение выражения 7-5?";
-        tests[0][2] = "3";
-        tests[0][3] = "4";
-        tests[0][4] = "2";
-        tests[0][5] = "3";
-        tests[1][1] = "Какова сумма всех углов в треугольнике?";
-        tests[1][2] = "90°";
-        tests[1][3] = "180°";
-        tests[1][4] = "360°";
-        tests[1][5] = "2";
-        tests[2][1] = "Переведите дробь 1/8 в проценты и укажите верное значение.";
-        tests[2][2] = "8%";
-        tests[2][3] = "25%";
-        tests[2][4] = "12,5%";
-        tests[2][5] = "3";
+        //String answer; //переменная для сканера
+        //[вопрос][варианты ответа]
+        String[][] tests = new String[3][6];
+        //[ответ][№правильного ответа][верно/неверно]
+        String[][] checkResult = new String[3][3];
+        //заполнение массива tests вопросами и ответами
+        tests[0][0] = "Чему равно значение выражения 7-5?";
+        tests[0][1] = "3";
+        tests[0][2] = "4";
+        tests[0][3] = "2";
+        tests[0][4] = "1";
+        tests[1][0] = "Какова сумма всех углов в треугольнике?";
+        tests[1][1] = "90°";
+        tests[1][2] = "180°";
+        tests[1][3] = "360°";
+        tests[2][0] = "Переведите дробь 1/8 в проценты и укажите верное значение.";
+        tests[2][1] = "8%";
+        tests[2][2] = "25%";
+        tests[2][3] = "12,5%";
+        tests[2][4] = "1,25%";
+        tests[2][5] = "1,8%";
+        //заполнение массива checkResult верными ответами
+        checkResult[0][1] = "3";
+        checkResult[1][1] = "2";
+        checkResult[2][1] = "3";
         //Приветствие
         System.out.println("Доброго времени суток! Предлагаю пройти тест школьного уровня по математике.");
         System.out.println("Представьтесь, пожалуйста.");
@@ -37,24 +39,26 @@ public class Lesson6HomeWork {
         System.out.println();
         //Само тестирование
         for (int i = 0; i < tests.length; i++) { //Вывод вопроса
-            System.out.println("Вопрос №" + tests[i][0] + ". " + tests[i][1]);
+            System.out.println("Вопрос №" + (i+1) + ". " + tests[i][0]);
             System.out.println();
-            for (int j = 0; j < 3; j++) { //Вывод варианта ответов
-                System.out.println(Integer.toString(j + 1) + ") " + tests[i][j + 2]);
+            for (int j = 1; j < 6; j++) { //Вывод вариантов ответов
+                if (!(tests[i][j] ==(null))) {
+                    System.out.println(Integer.toString(j) + ") " + tests[i][j]);
+                }
             }
             System.out.println();
             System.out.println("Введите номер ответа цифрой.");
-            answer = sc.nextLine();
-            if (answer.equals(tests[i][5])) { //Проверка ответа
-                tests[i][6] = "Правильный ответ";
+            checkResult[i][0] = sc.nextLine();
+            if (checkResult[i][0].equals(checkResult[i][1])) { //Проверка ответа
+                checkResult[i][2] = "Верно";
                 score += 1;
-            } else tests[i][6] = "Неправильный ответ";
+            } else checkResult[i][2] = "Неверно";
             System.out.println();
         }
         //Итоги тестирования
         System.out.println("Подведем итоги:");
-        for (int i = 0; i < tests.length; i++) {
-            System.out.println("№" + tests[i][0] + ": " + tests[i][6]);
+        for (int i = 0; i < checkResult.length; i++) {
+            System.out.println("№" + (i+1) + ": " + checkResult[i][0]+" "+ checkResult[i][2]);
         }
         System.out.println();
         switch (score) {
