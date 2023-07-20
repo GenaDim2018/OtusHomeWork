@@ -1,3 +1,0 @@
-privte void class Question () {
-
-}
