@@ -47,15 +47,11 @@ public abstract class Animal {
         return (int) distance / speed;
     }
 
-    ;
-
     public void info() {
         System.out.println(typeOfAnimal + " " + name);
         System.out.println("Скорость " + speed);
         System.out.println("Остаток сил " + stamina);
     }
-
-    ;
 
     protected void tired() {
         System.out.println(typeOfAnimal + " " + name + " устала, остаток сил " + stamina);
