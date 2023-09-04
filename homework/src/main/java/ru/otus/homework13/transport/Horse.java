@@ -14,8 +14,7 @@ public class Horse implements Transport {
 
     @Override
     public boolean checkTerrain(TypeOfTerrain terrain) {
-        if (terrain == TypeOfTerrain.plain || terrain == TypeOfTerrain.forest) return true;
-        return false;
+        return terrain == TypeOfTerrain.plain || terrain == TypeOfTerrain.forest;
     }
 
     private boolean inUse;
