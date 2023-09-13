@@ -59,7 +59,7 @@ public class Car implements Transport, FuelUsingTransport {
 
     @Override
     public boolean checkTerrain(TypeOfTerrain terrain) {
-        if (terrain == TypeOfTerrain.plain) return true;
+        if (terrain == TypeOfTerrain.PLAIN) return true;
         System.out.println("Машина не может передвигаться по этой местности.");
         return false;
     }

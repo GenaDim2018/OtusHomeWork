@@ -8,14 +8,14 @@ public class AllTerrainVehicle implements Transport, FuelUsingTransport {
 
     private String name;
     private int tank;
+    private int fuel;
+    private boolean inUse;
 
     @Override
     public boolean checkTerrain(TypeOfTerrain terrain) {
         return true;
     }
 
-    private int fuel;
-    private boolean inUse;
 
     @Override
     public boolean use() {
@@ -25,7 +25,10 @@ public class AllTerrainVehicle implements Transport, FuelUsingTransport {
 
     @Override
     public boolean free() {
-        if (inUse) return inUse = false;
+        if (inUse) {
+            inUse = false;
+            return true;
+        }
         return false;
     }
 

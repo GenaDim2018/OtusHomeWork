@@ -19,10 +19,12 @@ public class Human {
     }
 
     public void freeTransport() {
-        if (currentTransport.free()) {
+        if (currentTransport == null) System.out.println(name + " и так был без транспорта");
+        else {
+            currentTransport.free();
             currentTransport = null;
             System.out.println(name + " теперь без транспорта");
-        } else System.out.println(name + " и так был без траспорта");
+        }
     }
 
     public void move(int distance, TypeOfTerrain terrain) {

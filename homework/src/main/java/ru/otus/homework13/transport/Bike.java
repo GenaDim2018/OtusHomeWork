@@ -6,6 +6,7 @@ import ru.otus.homework13.transport.interfaces.Transport;
 public class Bike implements Transport {
 
     private String name;
+    private boolean inUse;
 
     public Bike(String name) {
         this.name = name;
@@ -13,11 +14,9 @@ public class Bike implements Transport {
 
     @Override
     public boolean checkTerrain(TypeOfTerrain terrain) {
-        if (terrain == TypeOfTerrain.plain || terrain == TypeOfTerrain.forest) return true;
+        if (terrain == TypeOfTerrain.PLAIN || terrain == TypeOfTerrain.FOREST) return true;
         return false;
     }
-
-    private boolean inUse;
 
     @Override
     public boolean use() {
@@ -27,7 +26,10 @@ public class Bike implements Transport {
 
     @Override
     public boolean free() {
-        if (inUse) return inUse = false;
+        if (inUse) {
+            inUse = false;
+            return true;
+        }
         return false;
     }
 

@@ -6,6 +6,7 @@ import ru.otus.homework13.transport.interfaces.Transport;
 public class Horse implements Transport {
     private String name;
     private int stamina;
+    private boolean inUse;
 
     public Horse(String name, int stamina) {
         this.name = name;
@@ -14,10 +15,9 @@ public class Horse implements Transport {
 
     @Override
     public boolean checkTerrain(TypeOfTerrain terrain) {
-        return terrain == TypeOfTerrain.plain || terrain == TypeOfTerrain.forest;
+        return terrain == TypeOfTerrain.PLAIN || terrain == TypeOfTerrain.FOREST;
     }
 
-    private boolean inUse;
 
     @Override
     public boolean use() {
@@ -27,7 +27,10 @@ public class Horse implements Transport {
 
     @Override
     public boolean free() {
-        if (inUse) return inUse = false;
+        if (inUse) {
+            inUse = false;
+            return true;
+        }
         return false;
     }
 
