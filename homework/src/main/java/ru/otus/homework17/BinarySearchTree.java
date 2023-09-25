@@ -4,23 +4,23 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class BinarySearchTree {
+public class BinarySearchTree<T> implements SearchTree {
     Node root;
 
     BinarySearchTree() {
         root = null;
     }
 
-    Node insert(Node node, int key) {
+    Node insert(Node node, T key) {
         // If the tree is empty, return a new node
         if (node == null) {
             node = new Node(key);
             return node;
         }
         // Otherwise, recur down the tree
-        if (key < node.key)
+        if (key.toString().compareTo(node.key.toString()) < 0)
             node.left = insert(node.left, key);
-        else if (key > node.key)
+        else if (key.toString().compareTo(node.key.toString()) > 0)
             node.right = insert(node.right, key);
 
         // Return the (unchanged) node pointer
@@ -28,12 +28,13 @@ public class BinarySearchTree {
     }
 
 
-    public Node find(Node root, int key) {
-        if (root == null || (root.key == key))
+    @Override
+    public Node find(Node root, Object key) {
+        if (root == null || (root.key.equals(key)))
             return root;
 
         // Key is greater than root's key
-        if (root.key < key)
+        if (key.toString().compareTo(root.key.toString()) > 0)
             return find(root.right, key);
 
         // Key is smaller than root's key
@@ -41,7 +42,7 @@ public class BinarySearchTree {
     }
 
 
-    public List getSortedList() {
+    public List<Integer> getSortedList() {
         List<Integer> list = new ArrayList<>();
         for (int i = 0; i <= 10; i++) {
             list.add((int) (Math.random() * 31));
