@@ -7,14 +7,16 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String userInput = "connection try";
+        String userInput = "connection try \n";
         byte[] bytes;
 
         try (Socket socket = new Socket("localhost", 8088)) {
             Client client = new Client(socket.getInputStream(), socket.getOutputStream());
             bytes = userInput.getBytes();
+            client.sendMessage(bytes);
+            client.receiveMessage();
             while (true) {
-                userInput = scanner.nextLine();
+                userInput = scanner.nextLine()+"\n";
                 bytes = userInput.getBytes();
                 client.sendMessage(bytes);
                 client.receiveMessage();

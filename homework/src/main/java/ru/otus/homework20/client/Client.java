@@ -18,7 +18,7 @@ public class Client implements AutoCloseable {
     public void receiveMessage() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         String str = reader.readLine();
-        System.out.println("Request: " + str);
+        System.out.println("Message: " + str);
     }
     @Override
     public void close() throws Exception {

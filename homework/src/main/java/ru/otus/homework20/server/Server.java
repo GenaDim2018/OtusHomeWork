@@ -12,9 +12,10 @@ public class Server {
                 Socket socket = serverSocket.accept();
                 System.out.println("Client connected");
                 readRequest(socket);
-                sendMessage("Введите ваше выражение в формате x + y \nдоступны операции +, -, *, /", socket.getOutputStream());
-                readRequest(socket);
-
+                sendMessage("Введите ваше выражение в формате x + y, доступны операции +, -, *, /", socket.getOutputStream());
+                while (true) {
+                    sendMessage(calculate(readRequest(socket)), socket.getOutputStream());
+                }
             }
         }
     }
@@ -26,12 +27,50 @@ public class Server {
         return str;
     }
 
-    private static void calculate(String request) {
 
-    }
-    private static void sendMessage (String message, OutputStream out) throws IOException {
-        byte [] bytes = message.getBytes();
+    private static void sendMessage(String message, OutputStream out) throws IOException {
+        message += "\n";
+        byte[] bytes = message.getBytes();
         out.write(bytes);
         out.flush();
     }
+
+    private static String calculate(String request) {
+        String resultMessage;
+        try {
+            String[] parser = request.split(" ");
+            int firstValue = Integer.parseInt(parser[0].trim());
+            int secondValue = Integer.parseInt(parser[2].trim());
+            int result;
+            String operation = parser[1].trim();
+
+            switch (operation) {
+                case "+" -> {
+                    result = firstValue + secondValue;
+                    resultMessage = request + " = " + result;
+                }
+                case "-" -> {
+                    result = firstValue - secondValue;
+                    resultMessage = request + " = " + result;
+                }
+                case "*" -> {
+                    result = firstValue * secondValue;
+                    resultMessage = request + " = " + result;
+                }
+                case "/" -> {
+                    result = firstValue / secondValue;
+                    resultMessage = request + " = " + result;
+                }
+                default -> {
+                    resultMessage = "Некорректный ввод";
+                }
+
+            }
+        } catch (Exception e) {
+            resultMessage = "Используйте описанный выше формат ввода";
+
+        }
+        return resultMessage;
+    }
+
 }
