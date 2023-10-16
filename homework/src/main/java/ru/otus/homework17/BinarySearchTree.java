@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class BinarySearchTree<T> implements SearchTree {
-    Node root;
+public class BinarySearchTree<T> implements SearchTree<T> {
+    Node<T> root;
 
     BinarySearchTree() {
         root = null;
     }
 
-    Node insert(Node node, T key) {
+    Node<T> insert(Node<T> node, T key) {
         // If the tree is empty, return a new node
         if (node == null) {
-            node = new Node(key);
+            node = new Node<>(key);
             return node;
         }
         // Otherwise, recur down the tree
@@ -29,9 +29,9 @@ public class BinarySearchTree<T> implements SearchTree {
 
 
     @Override
-    public Node find(Node root, Object key) {
+    public T find(Node<T> root, T key) {
         if (root == null || (root.key.equals(key)))
-            return root;
+            return key;
 
         // Key is greater than root's key
         if (key.toString().compareTo(root.key.toString()) > 0)
@@ -42,13 +42,13 @@ public class BinarySearchTree<T> implements SearchTree {
     }
 
 
-    public List<Integer> getSortedList() {
+    public List<T> getSortedList() {
         List<Integer> list = new ArrayList<>();
         for (int i = 0; i <= 10; i++) {
             list.add((int) (Math.random() * 31));
         }
         Collections.sort(list);
-        return list;
+        return (List<T>) list;
     }
 
     public static void run() {
@@ -58,8 +58,8 @@ public class BinarySearchTree<T> implements SearchTree {
         1 3   6 9
         0 4   7 10
          */
-        BinarySearchTree tree = new BinarySearchTree();
-        List list = tree.getSortedList();
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        List<Integer> list = tree.getSortedList();
         System.out.println(list);
         tree.root = tree.insert(tree.root, (int) list.get(5));
         tree.insert(tree.root, (int) list.get(2));
