@@ -19,13 +19,18 @@ public class MainApp {
     }
 
     public static int[] afterOne(int[] arr) {
-        int lastIndex = 0;
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] == 1) lastIndex = i;
+        for (int i = arr.length - 1; i >= 0; i--) {
+            if (arr[i] == 1) return Arrays.copyOfRange(arr, i + 1, arr.length);
         }
-        if (lastIndex == 0) throw (new RuntimeException());
-        return Arrays.copyOfRange(arr, lastIndex + 1, arr.length);
+        throw (new RuntimeException());
     }
+//        int lastIndex = -1;
+//        for (int i = 0; i < arr.length; i++) {
+//            if (arr[i] == 1) lastIndex = i;
+//        }
+//        if (lastIndex == -1) throw (new RuntimeException());
+//        return Arrays.copyOfRange(arr, lastIndex + 1, arr.length);
+
 
     public static boolean checkIsConsistsOnly1or2(int[] arr) {
         boolean flagOne = false;
